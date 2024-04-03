@@ -1,0 +1,5 @@
+fastapi
+aio_pika
+pydantic
+uvicorn
+pika
