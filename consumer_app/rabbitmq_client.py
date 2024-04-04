@@ -31,5 +31,7 @@ class RabbitMQClient:
                 await self.consume_task
             except asyncio.CancelledError:
                 pass
+            except Exception as unexpected_exception:
+                print("Unexpected exception has occurred")
         if self.connection:
             await self.connection.close()

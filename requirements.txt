@@ -3,3 +3,5 @@ aio_pika
 pydantic
 uvicorn
 pika
+sqlalchemy
+psycopg2-binary
