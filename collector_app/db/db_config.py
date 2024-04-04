@@ -1,5 +1,8 @@
-import os
 from sqlalchemy import create_engine
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 user_name = os.getenv("POSTGRE_USER")
 password = os.getenv("POSTGRE_PASSWORD")

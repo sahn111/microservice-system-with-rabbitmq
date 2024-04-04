@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from ..services import *
+from ..services import get_last_location_of_device_service, get_location_history_of_device_service
 from ...db.db_session_middleware import db_session_middleware
 from ...rabbitmq_config.rabbitmq_producer_instance import RabbitMQProducer, get_rabbitmq_producer
 from ...schema import DeviceLocation
@@ -27,13 +27,15 @@ async def create_location_record(
         return 500
 
 @router.get("/last_locations")
-async def get_last_locations_of_all_devices(
+async def get_last_locations_of_devices(
     db_session = Depends(db_session_middleware)
 ):
+    get_last_location_of_device_service(db_session=db_session)
     return 200
 
 @router.get("/history")
-async def get_history_by_device(
+async def get_location_history_of_devices(
     db_session = Depends(db_session_middleware)
 ):
+    get_location_history_of_device_service(db_session=db_session)
     return 200
