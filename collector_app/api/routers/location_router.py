@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from typing import Optional
 
 from ..services import get_last_location_of_device_service, get_location_history_of_device_service
 from ...db.db_session_middleware import db_session_middleware
@@ -28,14 +29,16 @@ async def create_location_record(
 
 @router.get("/last_locations")
 async def get_last_locations_of_devices(
+    device_id : Optional[str] = None,
     db_session = Depends(db_session_middleware)
 ):
-    get_last_location_of_device_service(db_session=db_session)
+    get_last_location_of_device_service(device_id=device_id, db_session=db_session)
     return 200
 
 @router.get("/history")
 async def get_location_history_of_devices(
+    device_id : Optional[str] = None,
     db_session = Depends(db_session_middleware)
 ):
-    get_location_history_of_device_service(db_session=db_session)
+    get_location_history_of_device_service(device_id=device_id, db_session=db_session)
     return 200

@@ -1,6 +1,7 @@
 import asyncio
-from aio_pika import connect, IncomingMessage, Connection
 
+from aio_pika import connect, IncomingMessage, Connection
+from .api.services.location_service.create_location import create_location_service 
 class RabbitMQClient:
     def __init__(self, amqp_url: str):
         self.amqp_url = amqp_url
@@ -13,6 +14,7 @@ class RabbitMQClient:
 
     async def on_message(self, message: IncomingMessage) -> None:
         async with message.process():
+            create_location_service()
             print(f"Message is: {message.body}")
 
     async def consume(self, queue_name: str):
