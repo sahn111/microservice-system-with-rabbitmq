@@ -22,8 +22,11 @@ async def create_device_router(
             message="Create device router started successfully"
         )
     )
-    create_device_service(data=data, db_session=db_session)
-    return 200
+    try:
+        create_device_service(data=data, db_session=db_session)
+        return 200
+    except Exception as e:
+        return 404
 
 @router.get("")
 async def get_device_router(
@@ -37,7 +40,10 @@ async def get_device_router(
                 message="Get single device router started"
             )
         )
-        return get_device_service(device_id=device_id, db_session=db_session)
+        try:
+            return get_device_service(device_id=device_id, db_session=db_session)
+        except Exception as e:
+            return 404
     else:
         write_system_logging_message(
             SystemLogPydantic(
@@ -45,7 +51,10 @@ async def get_device_router(
                 message="Get all devices router started"
             )
         )
-        return get_device_service(db_session=db_session)
+        try:
+            return get_device_service(db_session=db_session)
+        except Exception as e:
+            return 404
 
 @router.delete("/{device_id}")
 async def delete_device_router(
@@ -58,5 +67,8 @@ async def delete_device_router(
             message="Delete device router started"
         )
     )
-    delete_device_service(device_id=device_id, db_session=db_session)
-    return 200
+    try:
+        delete_device_service(device_id=device_id, db_session=db_session)
+        return 200
+    except Exception as e:
+        return 404

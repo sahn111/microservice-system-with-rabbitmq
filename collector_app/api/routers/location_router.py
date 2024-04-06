@@ -44,8 +44,11 @@ async def get_last_locations_of_devices(
             message=f"Get last location of device router started"
         )
     )
-    return get_last_location_of_device_service(device_id=device_id, db_session=db_session)
-    
+    try:
+        return get_last_location_of_device_service(device_id=device_id, db_session=db_session)
+    except Exception as e:
+        return 404
+
 @router.get("/history")
 async def get_location_history_of_device(
     device_id : Optional[str] = None,
@@ -57,4 +60,7 @@ async def get_location_history_of_device(
             message=f"Get location history of device router started"
         )
     )
-    return get_location_history_of_device_service(device_id=device_id, db_session=db_session)
+    try:
+        return get_location_history_of_device_service(device_id=device_id, db_session=db_session)
+    except Exception as e:
+        return 404
