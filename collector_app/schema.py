@@ -1,6 +1,7 @@
 import json
-
+from typing import Literal
 from pydantic import BaseModel
+
 class DeviceLocation(BaseModel):
     device_id : str
     x_coordinate: str
@@ -11,3 +12,7 @@ class DeviceLocation(BaseModel):
     
 class CreateDeviceModel(BaseModel):
     device_name : str
+
+class SystemLogPydantic(BaseModel):
+    type: Literal["INFO", "WARNING", "CRITICAL", "ERROR"]
+    message: str

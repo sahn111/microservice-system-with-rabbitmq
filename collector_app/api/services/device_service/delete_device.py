@@ -1,4 +1,3 @@
-from ....schema import CreateDeviceModel
 from ...repositories import delete_device_repository
 from ....db.db_session_middleware import db_session_middleware
 

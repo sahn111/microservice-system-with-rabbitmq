@@ -1,1 +1,1 @@
-from .get_location import *
+from .get_locations_of_devices import *

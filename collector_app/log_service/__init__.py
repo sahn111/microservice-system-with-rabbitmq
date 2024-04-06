@@ -1,0 +1,1 @@
+from .write_logger import write_system_logging_message

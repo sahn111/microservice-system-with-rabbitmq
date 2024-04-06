@@ -14,8 +14,7 @@ class RabbitMQClient:
 
     async def on_message(self, message: IncomingMessage) -> None:
         async with message.process():
-            create_location_service()
-            print(f"Message is: {message.body}")
+            create_location_service(data=message.body)
 
     async def consume(self, queue_name: str):
         await self.connect()
